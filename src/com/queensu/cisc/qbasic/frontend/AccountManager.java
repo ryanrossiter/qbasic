@@ -24,7 +24,12 @@ public class AccountManager {
             String line;
             while ((line = inputStream.readLine()) != null) {
                 try {
-                    accounts.add(Integer.valueOf(line));
+                    Integer accountNum = Integer.valueOf(line);
+                    if (accountNum.equals(0) == false) { // ignore special invalid account number
+                        accounts.add(accountNum);
+                    } else {
+                        break; // break on 0000000
+                    }
                 } catch (NumberFormatException e) {
                     e.printStackTrace();
                 }

@@ -19,6 +19,7 @@ public class TransactionSummarizer {
 
     public static void Destroy() {
         if (outputStream != null) {
+            outputStream.println("EOS"); // write transaction summary file ending
             outputStream.close();
             initialized = false;
         }

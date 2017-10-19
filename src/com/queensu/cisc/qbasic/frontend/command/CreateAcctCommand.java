@@ -1,7 +1,10 @@
 package com.queensu.cisc.qbasic.frontend.command;
 
 public class CreateAcctCommand implements Command {
-    public String COMMAND_STRING = "createacct";
+
+    public String getCommandString() {
+        return "createacct";
+    }
 
 <<<<<<< HEAD
     public boolean invoke(String[] params) {

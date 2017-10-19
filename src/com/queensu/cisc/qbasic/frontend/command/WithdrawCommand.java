@@ -6,7 +6,10 @@ import java.util.Scanner;
 
 public class WithdrawCommand implements Command {
     private static Scanner scanner = new Scanner( System.in );
-    public String COMMAND_STRING = "withdraw";
+
+    public String getCommandString() {
+        return "withdraw";
+    }
 
 <<<<<<< HEAD
     public void invoke(String[] params) {
@@ -55,7 +58,7 @@ public class WithdrawCommand implements Command {
         while (amount == null){
             System.out.print("Enter a valid amount to withdraw: ");
             try {
-                accNum = scanner.nextInt();
+                amount = scanner.nextInt();
             } catch (Exception e) {}
 
             if (amount != null && amount > 100000) {

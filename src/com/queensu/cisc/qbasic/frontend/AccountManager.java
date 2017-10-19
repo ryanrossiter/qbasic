@@ -1,9 +1,6 @@
 package com.queensu.cisc.qbasic.frontend;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +17,18 @@ public class AccountManager {
 
         try {
             inputStream = new BufferedReader(new FileReader(accountFile));
+        } catch (FileNotFoundException e) {
+            //e.printStackTrace();
+            System.out.println("Can't load with FileReader, trying as resource..");
+            try {
+                inputStream = new BufferedReader(new InputStreamReader(AccountManager.class.getResourceAsStream("/" + accountFile)));
+            } catch (Exception ee) {
+                System.out.println("Failed to load accounts file...");
+                return;
+            }
+        }
 
+        try {
             String line;
             while ((line = inputStream.readLine()) != null) {
                 try {
@@ -34,8 +42,6 @@ public class AccountManager {
                     e.printStackTrace();
                 }
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         } finally {

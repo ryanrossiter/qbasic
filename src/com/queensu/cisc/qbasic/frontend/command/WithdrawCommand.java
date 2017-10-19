@@ -1,5 +1,9 @@
 package com.queensu.cisc.qbasic.frontend.command;
 import java.util.Scanner;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 public class WithdrawCommand implements Command {
     private static Scanner scanner = new Scanner( System.in );
     public String COMMAND_STRING = "withdraw"
@@ -49,6 +53,6 @@ public class WithdrawCommand implements Command {
             }
 
         }
-        TransactionSummarizer.recordTransaction(COMMAND_STRING, accNum, amount);
+        TransactionSummarizer.recordTransaction("WDR", accNum, amount,null,null);
     }
 }

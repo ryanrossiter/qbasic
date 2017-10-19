@@ -12,7 +12,8 @@ public class CommandRegistry {
     }
 
     public void registerCommand(Command c) {
-        commands.putIfAbsent(c.COMMAND_STRING, c);
+        //System.out.println("Registered: " + c.getCommandString());
+        commands.putIfAbsent(c.getCommandString(), c);
     }
 
     public boolean invokeCommand(String commandString, String[] params) {

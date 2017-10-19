@@ -1,7 +1,10 @@
 package com.queensu.cisc.qbasic.frontend.command;
 
 public class TransferCommand implements Command {
-    public String COMMAND_STRING = "transfer";
+
+    public String getCommandString() {
+        return "transfer";
+    }
 
 <<<<<<< HEAD
     public boolean invoke(String[] params) {

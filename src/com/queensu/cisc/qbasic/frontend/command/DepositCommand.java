@@ -3,7 +3,10 @@ import com.queensu.cisc.qbasic.frontend.AccountManager;
 import com.queensu.cisc.qbasic.frontend.TransactionSummary;
 
 public class DepositCommand implements Command {
-    public String COMMAND_STRING = "deposit";
+
+    public String getCommandString() {
+        return "deposit";
+    }
 
 <<<<<<< HEAD
     public boolean invoke(String[] params) {

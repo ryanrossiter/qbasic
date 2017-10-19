@@ -6,6 +6,11 @@ import com.queensu.cisc.qbasic.frontend.Input.java
 import java.util.Scanner;
 
 public class WithdrawCommand implements Command {
+    private static Scanner scanner = new Scanner( System.in );
+
+    public String getCommandString() {
+        return "withdraw";
+    }
 
     public boolean invoke(String accountType) {
         Integer accNum = null;
@@ -26,7 +31,7 @@ public class WithdrawCommand implements Command {
         while (amount == null){
             System.out.print("Enter a valid amount to withdraw: ");
             try {
-                accNum = scanner.nextInt();
+                amount = scanner.nextInt();
             } catch (Exception e) {}
 
             if (amount != null && amount > 100000) {

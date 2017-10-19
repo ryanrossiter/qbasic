@@ -7,8 +7,6 @@ public class DepositCommand implements Command {
     public String getCommandString() {
         return "deposit";
     }
-
-<<<<<<< HEAD
     public boolean invoke(String[] params) {
         String accNum = null;
         String amount = null;
@@ -55,9 +53,7 @@ public class DepositCommand implements Command {
 
         }
         TransactionSummarizer.recordTransaction("DEP", accNum, amount,null,null);
-=======
     public boolean invoke(String accountType) {
->>>>>>> 5640f44df0fcb4f50af603f6c731697da607d623
         return false;
     }
 }

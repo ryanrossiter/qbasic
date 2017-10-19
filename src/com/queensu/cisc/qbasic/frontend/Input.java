@@ -1,44 +1,90 @@
+package com.queensu.cisc.qbasic.frontend;
+
 import java.util.Scanner;
-public class Input{
-    public String askForAccountNumber(same_line) {
-        private static Scanner scanner = new Scanner(System.in);
-        //same_line is the input if the user entered all the input on one line instead of hitting enter
-        noNum = true;
-        String accNum = same_line;
+
+public class Input {
+    private static Scanner scanner = new Scanner(System.in);
+
+    public static int PromptForAccountNumber() {
+        return Input.PromptForAccountNumber("Enter a valid account number: ");
+    }
+
+    public static int PromptForAccountNumber(String prompt) {
         Integer accNum = null;
         while (accNum == null) {
-            System.out.print("Enter a valid account number: ");
+            System.out.print(prompt);
             try {
                 accNum = scanner.nextInt();
-            } catch (Exception e) {
-            }
+            } catch (Exception e) {}
 
             if (AccountManager.Exists(accNum) == false) {
                 System.out.println("Account number is invalid.");
                 accNum = null;
             }
-            }
         }
-        return accNum.toString();
+
+        return accNum;
     }
-    public String askForAmount(same_line, login_type) {
-        int max_amount;
-        Integer amount = null;
-        if (login_type == machine)
+
+    public static int PromptForAmount(String accountType) {
+        return Input.PromptForAmount(accountType, "Enter an amount in cents: ");
+    }
+
+    public static int PromptForAmount(String accountType, String prompt) {
+        int max_amount = 0;
+        if (accountType == "machine") {
             max_amount = 100000;
-        else
+        } else if (accountType == "agent") {
             max_amount = 99999999;
-        while (amount == null){
-            System.out.print("Enter a valid amount to withdraw: ");
+        }
+
+        Integer amount = null;
+        while (amount == null) {
+            System.out.print(prompt);
             try {
-                accNum = scanner.nextInt();
+                amount = scanner.nextInt();
             } catch (Exception e) {}
 
-            if ((amount != null) && (amount > max_amount)) {
-                System.out.println("Value must be less than %d", max_amount);
-                amount = null;
+            if (amount != null) {
+                if (amount > max_amount) {
+                    System.out.println(String.format("Value must be less than %d.", max_amount));
+                    amount = null;
+                } else if (amount < 0) {
+                    System.out.println("Value must be positive.");
+                    amount = null;
+                }
             }
         }
-        return max_amount.toString();
+
+        return amount;
+    }
+
+    public static String PromptForAccountName() {
+        return Input.PromptForAccountName("Enter an Account Name: ");
+    }
+
+    public static String PromptForAccountName(String prompt) {
+        String accountName = null;
+        while (accountName == null) {
+            System.out.print(prompt);
+            try {
+                accountName = scanner.nextLine();
+            } catch (Exception e) {}
+
+            if (accountName != null) {
+                if (accountName.length() < 3 || accountName.length() > 30) {
+                    System.out.println("Account name must be between 3 and 30 characters.");
+                    accountName = null;
+                } else if (accountName.charAt(0) == ' ' || accountName.charAt(accountName.length() - 1) == ' ') {
+                    System.out.println("Account name must not begin or end with a space.");
+                    accountName = null;
+                } else if (accountName.matches("[a-zA-Z0-9]*") == false) {
+                    System.out.println("Account name must be alphanumeric.");
+                    accountName = null;
+                }
+            }
+        }
+
+        return accountName;
     }
 }

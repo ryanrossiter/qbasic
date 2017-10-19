@@ -13,8 +13,6 @@ public class DepositCommand implements Command {
         int accNum = Input.PromptForAccountNumber();
         int amount = Input.PromptForAmount(accountType, "Enter an amount to deposit: ");
 
-        // TODO: Check for withdraw total during this session
-
         TransactionSummarizer.RecordTransaction("DEP", accNum, amount,null,null);
 
         return false;

@@ -3,6 +3,7 @@ package com.queensu.cisc.qbasic.frontend.command;
 public class CreateAcctCommand implements Command {
     public String COMMAND_STRING = "createacct";
 
+<<<<<<< HEAD
     public boolean invoke(String[] params) {
         //shouldn't be accessible from machine mode
         String accNum = null;
@@ -32,6 +33,9 @@ public class CreateAcctCommand implements Command {
 
         }
 
+=======
+    public boolean invoke(String accountType) {
+>>>>>>> 5640f44df0fcb4f50af603f6c731697da607d623
         return false;
     }
 }

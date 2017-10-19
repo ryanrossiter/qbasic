@@ -3,6 +3,7 @@ package com.queensu.cisc.qbasic.frontend.command;
 public class TransferCommand implements Command {
     public String COMMAND_STRING = "transfer";
 
+<<<<<<< HEAD
     public boolean invoke(String[] params) {
         String accNum = null;
         String amount = null;
@@ -71,6 +72,9 @@ public class TransferCommand implements Command {
 
         }
         TransactionSummarizer.recordTransaction("XFR", accNum, amount,null,null);
+=======
+    public boolean invoke(String accountType) {
+>>>>>>> 5640f44df0fcb4f50af603f6c731697da607d623
         return false;
     }
 }

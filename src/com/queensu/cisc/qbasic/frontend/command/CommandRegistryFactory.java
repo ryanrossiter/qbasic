@@ -2,8 +2,9 @@ package com.queensu.cisc.qbasic.frontend.command;
 
 public class CommandRegistryFactory {
     // Creates command registry for machine users
-    public static CommandRegistry createMachineCommandRegistry() {
+    public static CommandRegistry CreateMachineCommandRegistry() {
         CommandRegistry cr = new CommandRegistry();
+        cr.registerCommand(new LogoutCommand());
         cr.registerCommand(new WithdrawCommand());
         cr.registerCommand(new DepositCommand());
         cr.registerCommand(new TransferCommand());
@@ -11,8 +12,8 @@ public class CommandRegistryFactory {
     }
 
     // Creates command registry for agent users
-    public static CommandRegistry createAgentCommandRegistry() {
-        CommandRegistry cr = CommandRegistryFactory.createMachineCommandRegistry();
+    public static CommandRegistry CreateAgentCommandRegistry() {
+        CommandRegistry cr = CommandRegistryFactory.CreateMachineCommandRegistry();
         cr.registerCommand(new CreateAcctCommand());
         cr.registerCommand(new DeleteAcctCommand());
         return cr;

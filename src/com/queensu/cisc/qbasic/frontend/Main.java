@@ -1,27 +1,35 @@
+package com.queensu.cisc.qbasic.frontend;
+
+import com.queensu.cisc.qbasic.frontend.command.CommandRegistry;
+
+import java.util.Arrays;
 import java.util.Scanner;
+
 public class Main {
     private static Scanner scanner = new Scanner( System.in );
-    private static void Main{
-        loop = true;
-        while (loop){
-            boolean login = false;
-            CommandRegistry login_status = null;
-            while (!login){
-                String input = scanner.nextLine();
-                if (Login.verify(input) != null) {
-                    login = true;
-                    login_status = Login.verify(input);
-                }
 
+    private static void main(String[] params){
+        boolean loop = true;
+        boolean logged_in = false;
+
+        while (loop) {
+            CommandRegistry commandRegistry = null;
+
+            while (!logged_in) {
+                String input = scanner.nextLine();
+                commandRegistry = Login.verify(input);
+                if (commandRegistry != null) {
+                    logged_in = true;
+                }
             }
-            command = true;
-            while (command){
-                String input = scanner.NextLine();
-                String[] command = input.split(" ");
-                String[] parameters = Arrays.copyOfRange(command, 1, command.length);
-                boolean logout = login_status.invokeCommand(inputs[0],inputs[1:]);
+
+            while (logged_in) {
+                String input = scanner.nextLine();
+                String[] cmd = input.split(" ");
+                String[] parameters = Arrays.copyOfRange(cmd, 1, cmd.length);
+                boolean logout = commandRegistry.invokeCommand(cmd[0], parameters);
                 if (logout){
-                    command = false;
+                    logged_in = false;
                 }
             }
         }

@@ -22,6 +22,18 @@ public class TransactionSummarizer {
     }
 
     public void recordTransaction(String transactionCode, int ac1, int cents, int ac2, String accountName) {
+        // assume all transaction data is already validated
 
+        if (accountName == null) {
+            accountName = "***";
+        }
+
+        String transaction = String.format("%s %07d %d %07d %s",
+            transactionCode,
+            ac1,
+            cents,
+            ac2,
+            accountName
+        );
     }
 }

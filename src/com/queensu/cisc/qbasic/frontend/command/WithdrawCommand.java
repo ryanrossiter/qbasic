@@ -3,25 +3,27 @@ import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import com.queensu.cisc.qbasic.frontend.TransactionSummarizer;
+import com.queensu.cisc.qbasic.frontend.AccountManager;
 
 public class WithdrawCommand implements Command {
     private static Scanner scanner = new Scanner( System.in );
-    public String COMMAND_STRING = "withdraw"
+    public String COMMAND_STRING = "withdraw";
 
     public void invoke(String[] params) {
-        String accNum;
-        String amount;
+        String accNum = null;
+        String amount = null;
         boolean noNum = true;
-        if (params.length() >0) {
+        if (0 <=params.length) {
             accNum = params[0];
         }
-        if params.length() >1){
+        if (params.length >1){
             amount = params[1];
         }
         while (noNum){
             if (accNum == null){}
-            else if (accNum.matches("[0-9]") && accNum.length == 8){
-                if AccountsManager.Exists(params[0]){
+            else if (accNum.matches("[0-9]") && accNum.length() == 8){
+                if (AccountsManager.Exists(params[0])){
                     noNum = false;
                 }
                 else{
@@ -38,7 +40,7 @@ public class WithdrawCommand implements Command {
         boolean noAmm = true;
         while (noAmm){
             if (amount == null){}
-            else if (amount.matches("[0-9]"){
+            else if (amount.matches("[0-9]")){
                 if (Integer.parseInt(amount)<= 100000){
                     noNum = false;
                 }

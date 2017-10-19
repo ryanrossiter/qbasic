@@ -1,6 +1,7 @@
 package com.queensu.cisc.qbasic.frontend.command;
-import com.queensu.cisc.qbasic.frontend.AccountManager;
-import com.queensu.cisc.qbasic.frontend.TransactionSummary;
+
+import com.queensu.cisc.qbasic.frontend.Input;
+import com.queensu.cisc.qbasic.frontend.TransactionSummarizer;
 
 public class DepositCommand implements Command {
 
@@ -8,56 +9,14 @@ public class DepositCommand implements Command {
         return "deposit";
     }
 
-<<<<<<< HEAD
-    public boolean invoke(String[] params) {
-        String accNum = null;
-        String amount = null;
-        boolean noNum = true;
-        if (0 <=params.length) {
-            accNum = params[0];
-        }
-        if (params.length >1){
-            amount = params[1];
-        }
-        while (noNum){
-            if (accNum == null){}
-            else if (accNum.matches("[0-9]") && accNum.length() == 7){
-                if (AccountsManager.Exists(params[0])){
-                    noNum = false;
-                }
-                else{
-                    System.out.print("Please enter a valid account number: ");
-                    accNum = scanner.nextLine();
-                }
-            }
-            else{
-                System.out.print("Please enter an 8-digit account number: ");
-                accNum = scanner.nextLine();
-            }
-
-        }
-        boolean noAmm = true;
-        while (noAmm){
-            if (amount == null){}
-            else if (amount.matches("[0-9]")){
-                if (Integer.parseInt(amount)<= 100000){
-                    noNum = false;
-                }
-                else{
-                    System.out.print("Amount too large, cannont deposit over 100000: ");
-                    accNum = scanner.nextLine();
-                }
-            }
-            else{
-                System.out.print("Please enter an amount in cents: ");
-                accNum = scanner.nextLine();
-            }
-
-        }
-        TransactionSummarizer.recordTransaction("DEP", accNum, amount,null,null);
-=======
     public boolean invoke(String accountType) {
->>>>>>> 5640f44df0fcb4f50af603f6c731697da607d623
+        int accNum = Input.PromptForAccountNumber();
+        int amount = Input.PromptForAmount(accountType, "Enter an amount to deposit: ");
+
+        // TODO: Check for withdraw total during this session
+
+        TransactionSummarizer.RecordTransaction("DEP", accNum, amount,null,null);
+
         return false;
     }
 }

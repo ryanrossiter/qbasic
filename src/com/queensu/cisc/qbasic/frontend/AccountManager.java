@@ -8,9 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AccountManager {
-    private List<Integer> accounts = new ArrayList<Integer>();
+    private static boolean initialized = false;
+    private static List<Integer> accounts = new ArrayList<Integer>();
 
-    public AccountManager(String accountFile) {
+    public static void Initialize(String accountFile) {
+        if (initialized == true) {
+            return;
+        }
+
         BufferedReader inputStream = null;
 
         try {
@@ -39,7 +44,7 @@ public class AccountManager {
         }
     }
 
-    public boolean exists(int accountNumber) {
+    public static boolean Exists(int accountNumber) {
         return accounts.contains(accountNumber);
     }
 }

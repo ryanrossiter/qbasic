@@ -9,6 +9,9 @@ public class Main {
     private static Scanner scanner = new Scanner( System.in );
 
     private static void main(String[] params){
+        AccountManager.Initialize("accounts.txt");
+        TransactionSummarizer.Initialize("tsf.txt");
+
         boolean loop = true;
         boolean logged_in = false;
 

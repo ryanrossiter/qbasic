@@ -19,8 +19,8 @@ public class Main {
                 String input = scanner.NextLine();
                 String[] command = input.split(" ");
                 String[] parameters = Arrays.copyOfRange(command, 1, command.length);
-                boolean end = login_status.invokeCommand(inputs[0],inputs[1:]);
-                if (end){
+                boolean logout = login_status.invokeCommand(inputs[0],inputs[1:]);
+                if (logout){
                     command = false;
                 }
             }

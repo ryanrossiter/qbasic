@@ -17,7 +17,7 @@ public class DepositCommand implements Command {
         }
         while (noNum){
             if (accNum == null){}
-            else if (accNum.matches("[0-9]") && accNum.length() == 8){
+            else if (accNum.matches("[0-9]") && accNum.length() == 7){
                 if (AccountsManager.Exists(params[0])){
                     noNum = false;
                 }

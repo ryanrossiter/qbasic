@@ -1,25 +1,9 @@
-package com.queensu.cisc.qbasic.frontend.command;
-import java.util.Scanner;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import com.queensu.cisc.qbasic.frontend.TransactionSummarizer;
-import com.queensu.cisc.qbasic.frontend.AccountManager;
 
-public class WithdrawCommand implements Command {
-    private static Scanner scanner = new Scanner( System.in );
-    public String COMMAND_STRING = "withdraw";
-
-    public void invoke(String[] params) {
-        String accNum = null;
-        String amount = null;
-        boolean noNum = true;
-        if (0 <=params.length) {
-            accNum = params[0];
-        }
-        if (params.length >1){
-            amount = params[1];
-        }
+public class Input{
+    public String askForAccountNumber(same_line){
+        //same_line is the input if the user entered all the input on one line instead of hitting enter
+        noNum = true;
+        String accNum = same_line;
         while (noNum){
             if (accNum == null){}
             else if (accNum.matches("[0-9]") && accNum.length() == 7){
@@ -37,15 +21,24 @@ public class WithdrawCommand implements Command {
             }
 
         }
+        return accNum;
+    }
+    public String askForAmount(same_line, login_type) {
+        int max_amount;
+        if (login_type == machine)
+            max_amount = 100000;
+        else
+            max_amount = 99999999;
         boolean noAmm = true;
+        String amount = same_line;
         while (noAmm){
             if (amount == null){}
             else if (amount.matches("[0-9]")){
-                if (Integer.parseInt(amount)<= 100000){
+                if (Integer.parseInt(amount)<= max_amount){
                     noNum = false;
                 }
                 else{
-                    System.out.print("Amount too large, cannont withdraw over 100000: ");
+                    System.out.print("Amount too large, please enter an amount under %d:", max_amount);
                     accNum = scanner.nextLine();
                 }
             }
@@ -55,6 +48,8 @@ public class WithdrawCommand implements Command {
             }
 
         }
-        TransactionSummarizer.recordTransaction("WDR", accNum, amount,null,null);
+        TransactionSummarizer.recordTransaction("DEP", accNum, amount,null,null);
+        return false;
+    }
     }
 }

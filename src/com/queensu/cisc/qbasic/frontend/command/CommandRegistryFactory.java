@@ -1,5 +1,5 @@
 package com.queensu.cisc.qbasic.frontend.command;
-
+//Determines which Commands are available to what type of login. Using a Command Registry
 public class CommandRegistryFactory {
     // Creates command registry for machine users
     public static CommandRegistry CreateMachineCommandRegistry() {

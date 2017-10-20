@@ -2,7 +2,8 @@ package com.queensu.cisc.qbasic.frontend.command;
 
 import java.util.HashMap;
 import java.util.Map;
-
+//A Command Registry holds data about whether it is in agent mode or machine mode, and holds information about which
+//commands are available to that mode. Also checks for permission when a request is sent.
 public class CommandRegistry {
     private Map<String, Command> commands = new HashMap<>();
     private String accountType = null;

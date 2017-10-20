@@ -2,13 +2,13 @@ package com.queensu.cisc.qbasic.frontend.command;
 
 import com.queensu.cisc.qbasic.frontend.Input;
 import com.queensu.cisc.qbasic.frontend.TransactionSummarizer;
-
+//CreateAcctCommand handles the create acct command
 public class CreateAcctCommand implements Command {
 
     public String getCommandString() {
         return "createacct";
     }
-
+    //Double checks to make sure that it is not in machine mode, then asks for Input and adds to Transaction Summary
     public boolean invoke(String accountType) {
         // Shouldn't be accessible from machine mode
         if (accountType.equals("machine")) {

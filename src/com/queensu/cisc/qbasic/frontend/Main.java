@@ -4,7 +4,8 @@ import com.queensu.cisc.qbasic.frontend.command.CommandRegistry;
 
 import java.util.Arrays;
 import java.util.Scanner;
-
+//Main Class waits for a user to login, then keeps them in a loop which handles commands, upon logout, the main class will start
+//over and wait for another login.
 public class Main {
     private static Scanner scanner = new Scanner( System.in );
 

@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 // This main class is intended to be run by the qbasic script
-// In the zip file this script is located at the root directory
+// In the zip file this script is located at the root directory (sh and bat scripts for linux and windows respectively)
 // Usage of the qbasic script: qbasic <account-filename> <transaction-summary-filename>
 
 //Main Class waits for a user to login, then keeps them in a loop which handles commands, upon logout, the main class will start

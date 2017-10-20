@@ -93,4 +93,20 @@ public class Input {
 
         return accountName; //returns a valid account name
     }
+    // Generic string input without a prompt
+    public static String PromptForInput() {
+        return Input.PromptForInput(null);
+    }
+    // Generic string prompt
+    public static String PromptForInput(String prompt) {
+        if (prompt != null) {
+            System.out.print(prompt);
+        }
+
+        try {
+            return scanner.nextLine();
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

@@ -3,11 +3,14 @@ package com.queensu.cisc.qbasic.frontend;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-
+/*
+    Account Manager is responsible for loading in the Valid Account List. Then it is responsible for checking whether or not
+    a given account number is in the Valid Accounts List.
+ */
 public class AccountManager {
     private static boolean initialized = false;
     private static List<Integer> accounts = new ArrayList<Integer>();
-
+    // Initialize loads in the Valid Account List using File Reader.
     public static void Initialize(String accountFile) {
         if (initialized == true) {
             return;
@@ -59,7 +62,7 @@ public class AccountManager {
             System.out.println("Using empty accounts file.");
         }
     }
-
+    //Exists checks if a given accountNumber is contained within the Valid Accounts List.
     public static boolean Exists(int accountNumber) {
         return accounts.contains(accountNumber);
     }

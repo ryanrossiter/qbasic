@@ -1,20 +1,22 @@
 package com.queensu.cisc.qbasic.frontend;
 
 import java.util.Scanner;
-
+//Input is the class that is responsible for gathering input from the user, it contains multiple methods designed so
+//that they can be reused in different commands.
 public class Input {
     private static Scanner scanner = new Scanner(System.in);
 
+    //Shortcut to use the default prompt for getting an account number.
     public static int PromptForAccountNumber() {
         return Input.PromptForAccountNumber("Enter a valid account number: ");
     }
-
+    //Full Function, where you can specify your own prompt.
     public static int PromptForAccountNumber(String prompt) {
         Integer accNum = null;
         while (accNum == null) {
             System.out.print(prompt);
             try {
-                accNum = scanner.nextInt();
+                accNum = scanner.nextInt(); //Checks to see if the input is an int, else returns null.
             } catch (Exception e) {}
 
             if (AccountManager.Exists(accNum) == false) {
@@ -25,11 +27,11 @@ public class Input {
 
         return accNum;
     }
-
+    //Shortcut to use default prompt for an amount.
     public static int PromptForAmount(String accountType) {
         return Input.PromptForAmount(accountType, "Enter an amount in cents: ");
     }
-
+    //Full function used to get an amount from the user,
     public static int PromptForAmount(String accountType, String prompt) {
         int max_amount = 0;
         if (accountType == "machine") {
@@ -58,11 +60,11 @@ public class Input {
 
         return amount;
     }
-
+    //Another Shortcut, this time for adding an Account Name, default prompt.
     public static String PromptForAccountName() {
         return Input.PromptForAccountName("Enter an Account Name: ");
     }
-
+    //Full function for prompting the user for an account name, manual prompt.
     public static String PromptForAccountName(String prompt) {
         String accountName = null;
         while (accountName == null) {
@@ -70,7 +72,7 @@ public class Input {
             try {
                 accountName = scanner.nextLine();
             } catch (Exception e) {}
-
+            //Error messages descriptive of error checking
             if (accountName != null) {
                 if (accountName.length() < 3 || accountName.length() > 30) {
                     System.out.println("Account name must be between 3 and 30 characters.");
@@ -85,6 +87,6 @@ public class Input {
             }
         }
 
-        return accountName;
+        return accountName; //returns a valid account name
     }
 }

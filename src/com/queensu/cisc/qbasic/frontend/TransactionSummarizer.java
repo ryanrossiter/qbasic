@@ -3,11 +3,11 @@ package com.queensu.cisc.qbasic.frontend;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-
+//The Transaction Summarizer is responsible for generating the transaction summary, and starting a new one.
 public class TransactionSummarizer {
     private static boolean initialized = false;
     private static PrintWriter outputStream = null;
-
+    //Initialize creates a new transaction summary.
     public static void Initialize(String outputFile) {
         try {
             outputStream = new PrintWriter(new FileWriter(outputFile));
@@ -16,7 +16,7 @@ public class TransactionSummarizer {
             e.printStackTrace();
         }
     }
-
+    //Writes the transaction summary file, and sets initialized false so that a new one will be initialized.
     public static void Destroy() {
         if (outputStream != null) {
             outputStream.println("EOS"); // write transaction summary file ending
@@ -24,7 +24,7 @@ public class TransactionSummarizer {
             initialized = false;
         }
     }
-
+    //Checks if there is a Valid Transaction File, creates one if there isn't, then adds a line to it.
     public static void RecordTransaction(String transactionCode, Integer ac1, Integer cents, Integer ac2, String accountName) {
         // assume all transaction data is already validated
 

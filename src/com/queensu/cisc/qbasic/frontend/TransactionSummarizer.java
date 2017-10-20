@@ -57,7 +57,7 @@ public class TransactionSummarizer {
             accountName
         );
 
-        System.out.println("Recorded transaction: " + transaction);
+        //System.out.println("Recorded transaction: " + transaction);
 
         outputStream.println(transaction);
     }

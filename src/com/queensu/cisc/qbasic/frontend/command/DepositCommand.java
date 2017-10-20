@@ -12,6 +12,7 @@ public class DepositCommand implements Command {
         int accNum = Input.PromptForAccountNumber();
         int amount = Input.PromptForAmount(accountType, "Enter an amount to deposit: ");
 
-        TransactionSummarizer.RecordTransaction("DEP", accNum, amount,null,null);
+        TransactionSummarizer.RecordTransaction("DEP", accNum, amount, null, null);
         return false;
+    }
 }

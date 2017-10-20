@@ -20,7 +20,7 @@ public class Main {
 
             while (!logged_in) {
                 String input = scanner.nextLine();
-                commandRegistry = Login.verify(input);
+                commandRegistry = Login.Verify(input);
                 if (commandRegistry != null) {
                     logged_in = true;
                 }

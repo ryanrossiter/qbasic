@@ -27,39 +27,35 @@ public class AccountManager {
                 inputStream = new BufferedReader(new InputStreamReader(AccountManager.class.getResourceAsStream("/" + accountFile)));
             } catch (Exception ee) {
                 System.out.println("Failed to load accounts file.");
+                // Continue with empty account list
                 return;
             }
         }
 
-        if (inputStream != null) {
-            try {
-                String line;
-                while ((line = inputStream.readLine()) != null) {
-                    try {
-                        Integer accountNum = Integer.valueOf(line);
-                        if (accountNum.equals(0) == false) { // ignore special invalid account number
-                            accounts.add(accountNum);
-                        } else {
-                            break; // break on 0000000
-                        }
-                    } catch (NumberFormatException e) {
-                        e.printStackTrace();
+        try {
+            String line;
+            while ((line = inputStream.readLine()) != null) {
+                try {
+                    Integer accountNum = Integer.valueOf(line);
+                    if (accountNum.equals(0) == false) { // ignore special invalid account number
+                        accounts.add(accountNum);
+                    } else {
+                        break; // break on 0000000
                     }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (inputStream != null) {
-                    try {
-                        inputStream.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
                 }
             }
-        } else {
-            // use empty accounts file
-            System.out.println("Using empty accounts file.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
     //Exists checks if a given accountNumber is contained within the Valid Accounts List.

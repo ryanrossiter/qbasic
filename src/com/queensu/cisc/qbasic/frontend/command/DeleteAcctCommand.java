@@ -10,6 +10,12 @@ public class DeleteAcctCommand implements Command {
     }
 
     public boolean invoke(String accountType) {
+        // Shouldn't be accessible from machine mode
+        if (accountType.equals("machine")) {
+            System.out.println("Command only available when in agent mode.");
+            return false;
+        }
+
         int accNumber = Input.PromptForAccountNumber("Enter the account number you want to delete: ");
         String accName = Input.PromptForAccountName("Enter the name of the account you want to delete: ");
 

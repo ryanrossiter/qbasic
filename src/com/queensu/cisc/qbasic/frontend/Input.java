@@ -4,6 +4,10 @@ import java.util.Scanner;
 //Input is the class that is responsible for gathering input from the user, it contains multiple methods designed so
 //that they can be reused in different commands.
 public class Input {
+    // Max transaction amount for machine and agent account types
+    private static int MAX_AMOUNT_MACHINE = 100000;
+    private static int MAX_AMOUNT_AGENT = 99999999;
+
     private static Scanner scanner = new Scanner(System.in);
 
     //Shortcut to use the default prompt for getting an account number.
@@ -35,9 +39,9 @@ public class Input {
     public static int PromptForAmount(String accountType, String prompt) {
         int max_amount = 0;
         if (accountType == "machine") {
-            max_amount = 100000;
+            max_amount = MAX_AMOUNT_MACHINE;
         } else if (accountType == "agent") {
-            max_amount = 99999999;
+            max_amount = MAX_AMOUNT_AGENT;
         }
 
         Integer amount = null;

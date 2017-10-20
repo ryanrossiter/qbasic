@@ -1,44 +1,25 @@
 package com.queensu.cisc.qbasic.frontend.command;
-import com.queensu.cisc.qbasic.frontend.AccountManager;
-import com.queensu.cisc.qbasic.frontend.TransactionSummarizer;
-import com.queensu.cisc.qbasic.frontend.Input.java
 
-import java.util.Scanner;
+import com.queensu.cisc.qbasic.frontend.Input;
+import com.queensu.cisc.qbasic.frontend.TransactionSummarizer;
 
 public class WithdrawCommand implements Command {
-    private static Scanner scanner = new Scanner( System.in );
+    private static int MAX_WITHDRAW_AMOUNT = 100000;
+    private int withdrawTotal = 0; // machine user per-session withdraw total
 
     public String getCommandString() {
         return "withdraw";
     }
 
     public boolean invoke(String accountType) {
-        Integer accNum = null;
-        Integer amount = null;
+        int accNum = Input.PromptForAccountNumber();
+        int amount = Input.PromptForAmount(accountType, "Enter an amount to withdraw: ");
 
-        while (accNum == null){
-            System.out.print("Enter a valid account number: ");
-            try {
-                accNum = scanner.nextInt();
-            } catch (Exception e) {}
-
-            if (AccountManager.Exists(accNum) == false) {
-                System.out.println("Account number is invalid.");
-                accNum = null;
-            }
+        if (withdrawTotal >= WithdrawCommand.MAX_WITHDRAW_AMOUNT) {
+            System.out.println("A maximum of $1,000 can be withdrawn in an ATM session.");
+            return false;
         }
-
-        while (amount == null){
-            System.out.print("Enter a valid amount to withdraw: ");
-            try {
-                amount = scanner.nextInt();
-            } catch (Exception e) {}
-
-            if (amount != null && amount > 100000) {
-                System.out.println("Value must be less than 100000.");
-                amount = null;
-            }
-        }
+        withdrawTotal += amount;
 
         TransactionSummarizer.RecordTransaction("WDR", accNum, amount, null,null);
 

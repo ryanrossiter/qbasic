@@ -8,9 +8,8 @@ import java.util.Scanner;
 public class Main {
     private static Scanner scanner = new Scanner( System.in );
 
-    public static void main(String[] params){
+    public static void main(String[] params) {
         AccountManager.Initialize("accounts.txt");
-        TransactionSummarizer.Initialize("tsf.txt");
 
         boolean loop = true;
         boolean logged_in = false;
@@ -26,6 +25,8 @@ public class Main {
                 }
             }
 
+            TransactionSummarizer.Initialize(String.format("tsf-%d.txt", System.currentTimeMillis()));
+
             while (logged_in) {
                 String input = scanner.nextLine();
                 String[] cmd = input.split(" ");
@@ -35,6 +36,8 @@ public class Main {
                     logged_in = false;
                 }
             }
+
+            TransactionSummarizer.Destroy();
         }
      }
  }

@@ -10,8 +10,8 @@ public class CreateAcctCommand implements Command {
     }
 
     public boolean invoke(String accountType) {
-        //shouldn't be accessible from machine mode
-        if (accountType == "machine") {
+        // Shouldn't be accessible from machine mode
+        if (accountType.equals("machine")) {
             System.out.println("Command only available when in agent mode.");
             return false;
         }

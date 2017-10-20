@@ -3,6 +3,10 @@ package com.queensu.cisc.qbasic.frontend;
 import java.util.Scanner;
 
 public class Input {
+    // Max transaction amount for machine and agent account types
+    private static int MAX_AMOUNT_MACHINE = 100000;
+    private static int MAX_AMOUNT_AGENT = 99999999;
+
     private static Scanner scanner = new Scanner(System.in);
 
     public static int PromptForAccountNumber() {
@@ -33,9 +37,9 @@ public class Input {
     public static int PromptForAmount(String accountType, String prompt) {
         int max_amount = 0;
         if (accountType == "machine") {
-            max_amount = 100000;
+            max_amount = MAX_AMOUNT_MACHINE;
         } else if (accountType == "agent") {
-            max_amount = 99999999;
+            max_amount = MAX_AMOUNT_AGENT;
         }
 
         Integer amount = null;

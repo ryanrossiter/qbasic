@@ -8,6 +8,7 @@ public class DepositCommand implements Command {
     public String getCommandString() {
         return "deposit";
     }
+
     public boolean invoke(String accountType) {
         int accNum = Input.PromptForAccountNumber();
         int amount = Input.PromptForAmount(accountType, "Enter an amount to deposit: ");

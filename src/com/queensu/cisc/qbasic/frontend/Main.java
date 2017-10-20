@@ -10,7 +10,15 @@ public class Main {
     private static Scanner scanner = new Scanner( System.in );
 
     public static void main(String[] params) {
-        AccountManager.Initialize("accounts.txt");
+        if (params.length < 2) {
+            System.out.println("Usage: qbasic account-filename transaction-summary-filename");
+            return;
+        }
+
+        String accountFilename = params[0];
+        String transactionSummaryFilename = params[1];
+
+        AccountManager.Initialize(accountFilename);
 
         boolean loop = true;
         boolean logged_in = false;
@@ -26,7 +34,7 @@ public class Main {
                 }
             }
 
-            TransactionSummarizer.Initialize(String.format("tsf-%d.txt", System.currentTimeMillis()));
+            TransactionSummarizer.Initialize(transactionSummaryFilename); //String.format("tsf-%d.txt", System.currentTimeMillis()));
 
             while (logged_in) {
                 String input = scanner.nextLine();

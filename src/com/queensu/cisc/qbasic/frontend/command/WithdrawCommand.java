@@ -15,11 +15,13 @@ public class WithdrawCommand implements Command {
         int accNum = Input.PromptForAccountNumber();
         int amount = Input.PromptForAmount(accountType, "Enter an amount to withdraw: ");
 
-        if (withdrawTotal >= WithdrawCommand.MAX_WITHDRAW_AMOUNT) {
-            System.out.println("A maximum of $1,000 can be withdrawn in an ATM session.");
-            return false;
+        if (accountType.equals("machine")) {
+            if (withdrawTotal >= WithdrawCommand.MAX_WITHDRAW_AMOUNT) {
+                System.out.println("A maximum of $1,000 can be withdrawn in an ATM session.");
+                return false;
+            }
+            withdrawTotal += amount;
         }
-        withdrawTotal += amount;
 
         TransactionSummarizer.RecordTransaction("WDR", accNum, amount, null,null);
 

@@ -17,7 +17,7 @@ public class Main {
 
         String accountFilename = params[0];
         String transactionSummaryFilename = params[1];
-
+        //Starts up the Valid Account File, using the input from running the program: accountFilename
         AccountManager.Initialize(accountFilename);
 
         boolean loop = true;

@@ -28,7 +28,7 @@ public class TransactionSummarizer {
     public static void RecordTransaction(String transactionCode, Integer ac1, Integer cents, Integer ac2, String accountName) {
         // assume all transaction data is already validated
 
-        if (initialized == false) {
+        if (initialized == false) {//First write to the file after a login.
             System.out.println("TransactionSummarizer not initialized.");
         }
 

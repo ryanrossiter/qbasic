@@ -62,4 +62,8 @@ public class AccountManager {
     public static boolean Exists(int accountNumber) {
         return accounts.contains(accountNumber);
     }
+
+    public static void Delete(int accountNumber) {
+        accounts.remove(Integer.valueOf(accountNumber));
+    }
 }

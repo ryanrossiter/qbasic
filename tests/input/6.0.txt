@@ -1,0 +1,7 @@
+login
+machine
+transfer
+0123456
+1234567
+50000
+logout

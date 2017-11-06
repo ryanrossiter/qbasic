@@ -1,0 +1,6 @@
+login
+machine
+withdraw
+0123456
+50000
+logout

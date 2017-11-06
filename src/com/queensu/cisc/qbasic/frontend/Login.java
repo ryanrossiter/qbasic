@@ -6,10 +6,10 @@ import com.queensu.cisc.qbasic.frontend.command.CommandRegistryFactory;
 public class Login {
     //Verify takes a string and determines whether to start an agent or machine session
      public static CommandRegistry Verify(String input){
-        if (input.equals("login agent")) {
+        if (input.equals("agent")) {
             System.out.println("Logged in as an agent user.");
             return CommandRegistryFactory.CreateAgentCommandRegistry();
-        } else if (input.equals("login machine")) {
+        } else if (input.equals("machine")) {
             System.out.println("Logged in as a machine user.");
             return CommandRegistryFactory.CreateMachineCommandRegistry();
         } else {

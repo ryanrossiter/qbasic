@@ -1,5 +1,6 @@
 package com.queensu.cisc.qbasic.frontend;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 //Input is the class that is responsible for gathering input from the user, it contains multiple methods designed so
 //that they can be reused in different commands.
@@ -16,17 +17,21 @@ public class Input {
     }
     //Full Function, where you can specify your own prompt.
     public static int PromptForAccountNumber(String prompt) {
-        Integer accNum = null;
-        while (accNum == null) {
-            System.out.print(prompt);
-            try {
-                accNum = scanner.nextInt(); //Checks to see if the input is an int, else returns null.
-            } catch (Exception e) {}
-
-            if (AccountManager.Exists(accNum) == false) {
-                System.out.println("Account number is invalid.");
-                accNum = null;
+        Integer accNum = -1;
+        System.out.print(prompt);
+        try {
+            if (scanner.hasNextInt()) {
+                accNum = scanner.nextInt(); //Checks to see if the input is an int, else returns null.!= null) {
             }
+            scanner.nextLine(); // consume newline char
+        } catch (NoSuchElementException e) {
+            // no more input to read from stream, all done!
+            Main.exit();
+        } catch (Exception e) {}
+
+        if (accNum < 1000000 || accNum > 9999999) {
+            System.out.println("Account number must be 7 digits.");
+            accNum = -1;
         }
 
         return accNum;
@@ -44,21 +49,25 @@ public class Input {
             max_amount = MAX_AMOUNT_AGENT;
         }
 
-        Integer amount = null;
-        while (amount == null) {
-            System.out.print(prompt);
-            try {
+        Integer amount = -1;
+        System.out.print(prompt);
+        try {
+            if (scanner.hasNextInt()) {
                 amount = scanner.nextInt();
-            } catch (Exception e) {}
+            }
+            scanner.nextLine(); // consume newline char
+        } catch (NoSuchElementException e) {
+            // no more input to read from stream, all done!
+            Main.exit();
+        } catch (Exception e) {}
 
-            if (amount != null) {
-                if (amount > max_amount) {
-                    System.out.println(String.format("Value must be less than %d.", max_amount));
-                    amount = null;
-                } else if (amount < 0) {
-                    System.out.println("Value must be positive.");
-                    amount = null;
-                }
+        if (amount != null) {
+            if (amount > max_amount) {
+                System.out.println(String.format("Value must be less than %d.", max_amount));
+                amount = -1;
+            } else if (amount < 0) {
+                System.out.println("Value must be positive.");
+                amount = -1;
             }
         }
 
@@ -71,23 +80,25 @@ public class Input {
     //Full function for prompting the user for an account name, manual prompt.
     public static String PromptForAccountName(String prompt) {
         String accountName = null;
-        while (accountName == null) {
-            System.out.print(prompt);
-            try {
-                accountName = scanner.nextLine();
-            } catch (Exception e) {}
-            //Error messages descriptive of error checking
-            if (accountName != null) {
-                if (accountName.length() < 3 || accountName.length() > 30) {
-                    System.out.println("Account name must be between 3 and 30 characters.");
-                    accountName = null;
-                } else if (accountName.charAt(0) == ' ' || accountName.charAt(accountName.length() - 1) == ' ') {
-                    System.out.println("Account name must not begin or end with a space.");
-                    accountName = null;
-                } else if (accountName.matches("[a-zA-Z0-9]*") == false) {
-                    System.out.println("Account name must be alphanumeric.");
-                    accountName = null;
-                }
+        System.out.print(prompt);
+        try {
+            accountName = scanner.nextLine();
+        } catch (NoSuchElementException e) {
+            // no more input to read from stream, all done!
+            Main.exit();
+        } catch (Exception e) {}
+
+        //Error messages descriptive of error checking
+        if (accountName != null) {
+            if (accountName.length() < 3 || accountName.length() > 30) {
+                System.out.println("Account name must be between 3 and 30 characters.");
+                accountName = null;
+            } else if (accountName.charAt(0) == ' ' || accountName.charAt(accountName.length() - 1) == ' ') {
+                System.out.println("Account name must not begin or end with a space.");
+                accountName = null;
+            } else if (accountName.matches("[a-zA-Z0-9 ]*") == false) {
+                System.out.println("Account name must be alphanumeric.");
+                accountName = null;
             }
         }
 
@@ -105,8 +116,11 @@ public class Input {
 
         try {
             return scanner.nextLine();
-        } catch (Exception e) {
-            return null;
-        }
+        } catch (NoSuchElementException e) {
+            // no more input to read from stream, all done!
+            Main.exit();
+        } catch (Exception e) {}
+
+        return null;
     }
 }

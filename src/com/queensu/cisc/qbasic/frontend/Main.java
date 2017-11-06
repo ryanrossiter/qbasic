@@ -12,6 +12,11 @@ import java.util.Scanner;
 //Main Class waits for a user to login, then keeps them in a loop which handles commands, upon logout, the main class will start
 //over and wait for another login.
 public class Main {
+    public static void exit() {
+        System.out.close();
+        System.exit(0);
+    }
+
     public static void main(String[] params) {
         if (params.length < 2) {
             System.out.println("usage: qbasic <account-filename> <transaction-summary-filename>");
@@ -31,9 +36,13 @@ public class Main {
 
             while (!logged_in) {
                 String input = Input.PromptForInput();
-                commandRegistry = Login.Verify(input);
-                if (commandRegistry != null) {
-                    logged_in = true;
+                if (input.equals("login")) {
+                    System.out.print("Login type (agent or machine): ");
+                    input = Input.PromptForInput();
+                    commandRegistry = Login.Verify(input);
+                    if (commandRegistry != null) {
+                        logged_in = true;
+                    }
                 }
             }
 

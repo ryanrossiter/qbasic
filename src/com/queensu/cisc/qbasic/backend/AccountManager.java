@@ -9,14 +9,30 @@ import java.util.*;
  */
 public class AccountManager {
     public static class Account {
-        public int number;
-        public int balance;
-        public String name;
+        private int number;
+        private int balance;
+        private String name;
 
         public Account(int number, int balance, String name) {
             this.number = number;
             this.balance = balance;
             this.name = name;
+        }
+
+        public void setBalance(int balance) {
+            // do things
+        }
+
+        public int getNumber() {
+            return number;
+        }
+
+        public int getBalance() {
+            return balance;
+        }
+
+        public String getName() {
+            return name;
         }
     }
 
@@ -34,11 +50,11 @@ public class AccountManager {
             inputStream = new BufferedReader(new FileReader(accountFile));
         } catch (FileNotFoundException e) {
             //e.printStackTrace();
-            System.out.println("Can't load accountFile with FileReader, trying as resource.");
+            System.out.println("Can't load masterAccountFile with FileReader, trying as resource.");
             try {
                 inputStream = new BufferedReader(new InputStreamReader(AccountManager.class.getResourceAsStream("/" + accountFile)));
             } catch (Exception ee) {
-                System.out.println("Failed to load accounts file.");
+                System.out.println("Failed to load master accounts file.");
                 // Continue with empty account list
                 return;
             }
@@ -75,20 +91,24 @@ public class AccountManager {
         return accounts.containsKey(accountNumber);
     }
 
+    public static Account GetAccount(int accountNumber) {
+        return accounts.get(accountNumber);
+    }
+
     public static void Create(int accountNumber, String name) {
         if (accounts.containsKey(accountNumber) == false) {
             accounts.put(accountNumber, new Account(accountNumber, 0, name));
         }
     }
 
-    public static void Delete(int accountNumber) {
-        accounts.remove(accountNumber);
-    }
-
-    public static void SetBalance(int accountNumber, int balance) {
-        Account a = accounts.get(accountNumber);
-        if (a != null) {
-            a.balance = balance;
+    public static void Delete(int accountNumber, String name) {
+        Account acc = AccountManager.GetAccount(accountNumber);
+        if (acc == null) {
+            // err
+        } else if (acc.getName().equals(name) == false) {
+            // name doesn't match
+        } else {
+            accounts.remove(accountNumber);
         }
     }
 }

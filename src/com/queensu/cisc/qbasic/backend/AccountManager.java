@@ -30,6 +30,10 @@ public class AccountManager {
             return false;
         }
 
+        public String toString() {
+            return String.format("%07d %d %s", number, balance, name);
+        }
+
         public int getNumber() {
             return number;
         }
@@ -93,6 +97,7 @@ public class AccountManager {
             }
         }
     }
+
     //Exists checks if a given accountNumber is contained within the Valid Accounts List.
     public static boolean Exists(int accountNumber) {
         return accounts.containsKey(accountNumber);
@@ -118,6 +123,39 @@ public class AccountManager {
             System.out.println("Failed to delete account: account name does not match.");
         } else {
             accounts.remove(accountNumber);
+        }
+    }
+
+    public static void GenerateNewMasterAccountsFile(String masterAccountFilename) {
+        PrintWriter outputStream;
+        try {
+            outputStream = new PrintWriter(new FileWriter(masterAccountFilename));
+
+            Iterator<Account> itr = accounts.values().iterator();
+            while (itr.hasNext()) {
+                outputStream.println(itr.next().toString());
+            }
+
+            outputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void GenerateNewValidAccountsFile(String validAccountFilename) {
+        PrintWriter outputStream;
+        try {
+            outputStream = new PrintWriter(new FileWriter(validAccountFilename));
+
+            Iterator<Account> itr = accounts.values().iterator();
+            while (itr.hasNext()) {
+                outputStream.println(String.format("%07d", itr.next().getNumber()));
+            }
+
+            outputStream.println("0000000");
+            outputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

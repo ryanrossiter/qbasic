@@ -75,7 +75,7 @@ public class AccountManager {
             String line;
             while ((line = inputStream.readLine()) != null) {
                 try {
-                    String[] items = line.split(" ", 2);
+                    String[] items = line.split(" ", 3);
                     Integer accountNum = Integer.valueOf(items[0]);
                     Integer accountBal = Integer.valueOf(items[1]);
                     String accountName = items[2];

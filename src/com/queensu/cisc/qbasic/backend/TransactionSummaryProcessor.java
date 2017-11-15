@@ -31,12 +31,7 @@ public class TransactionSummaryProcessor {
                     String[] items = line.split(" ", 5);
                     String transactionID = items[0];
                     Integer accountNum0 = Integer.valueOf(items[1]);
-
-                    Integer amount = 0;
-                    if (items[2].equals("***") == false) {
-                        amount = Integer.valueOf(items[2]);
-                    }
-
+                    Integer amount = Integer.valueOf(items[2]);
                     Integer accountNum1 = Integer.valueOf(items[3]);
                     String accountName = items[4];
 

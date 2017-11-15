@@ -19,8 +19,15 @@ public class AccountManager {
             this.name = name;
         }
 
-        public void setBalance(int balance) {
-            // do things
+        public boolean setBalance(int balance) {
+            if (balance < 0) {
+                System.out.println("Failed to update balance, cannot be negative.");
+            } else {
+                this.balance = balance;
+                return true;
+            }
+
+            return false;
         }
 
         public int getNumber() {
@@ -98,15 +105,17 @@ public class AccountManager {
     public static void Create(int accountNumber, String name) {
         if (accounts.containsKey(accountNumber) == false) {
             accounts.put(accountNumber, new Account(accountNumber, 0, name));
+        } else {
+            System.out.println("Failed to create account: account number " + accountNumber + " already exists.");
         }
     }
 
     public static void Delete(int accountNumber, String name) {
         Account acc = AccountManager.GetAccount(accountNumber);
         if (acc == null) {
-            // err
+            System.out.println("Failed to delete account: account number " + accountNumber + " does not exist.");
         } else if (acc.getName().equals(name) == false) {
-            // name doesn't match
+            System.out.println("Failed to delete account: account name does not match.");
         } else {
             accounts.remove(accountNumber);
         }

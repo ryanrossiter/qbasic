@@ -2,7 +2,7 @@ package com.queensu.cisc.qbasic.backend.transaction;
 
 import java.util.HashMap;
 import java.util.Map;
-
+//Handles one line of input from a Merged Transaction Summary File, receives that line from Main.java
 public class TransactionRegistry {
     private Map<String, Transaction> transactions = new HashMap<>();
 

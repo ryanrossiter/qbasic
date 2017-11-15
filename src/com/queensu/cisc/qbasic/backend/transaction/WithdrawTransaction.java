@@ -1,7 +1,7 @@
 package com.queensu.cisc.qbasic.backend.transaction;
 
 import com.queensu.cisc.qbasic.backend.AccountManager;
-
+//Handles the withdraw transaction, receives input from TransactionRegistry.java.
 public class WithdrawTransaction implements Transaction {
 
     @Override

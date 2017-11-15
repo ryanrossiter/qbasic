@@ -9,15 +9,17 @@ public class TransferTransaction implements Transaction {
         return "XFR";
     }
 
+    // Gets the accounts associated with accountNum0 and accountNum1 and performs the transfer operation
+    // from account0 to account1
     @Override
     public void processTransaction(int accountNum0, int amount, int accountNum1, String accountName) {
         AccountManager.Account acc0 = AccountManager.GetAccount(accountNum0);
         AccountManager.Account acc1 = AccountManager.GetAccount(accountNum1);
 
         if (acc0 == null) {
-            // err
+            System.out.println("Account number " + accountNum0 + " does not exist.");
         } else if (acc1 == null) {
-            // err
+            System.out.println("Account number " + accountNum1 + " does not exist.");
         } else {
             boolean success = acc0.setBalance(acc0.getBalance() - amount);
             if (success) {

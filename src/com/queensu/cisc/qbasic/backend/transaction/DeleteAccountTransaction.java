@@ -10,7 +10,7 @@ public class DeleteAccountTransaction implements Transaction {
     }
 
     @Override
-    //Deletes the specified account.
+    //Deletes the account associated with accountNum0.
     public void processTransaction(int accountNum0, int amount, int accountNum1, String accountName) {
         AccountManager.Delete(accountNum0, accountName);
     }

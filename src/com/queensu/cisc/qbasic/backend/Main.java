@@ -2,12 +2,12 @@ package com.queensu.cisc.qbasic.backend;
 
 import java.io.*;
 
-// This main class is intended to be run by the qbasic script
+// This main class is intended to be run by the back-office script
 // In the zip file this script is located at the root directory (sh and bat scripts for linux and windows respectively)
-// Usage of the qbasic script: qbasic <account-filename> <transaction-summary-filename>
+// Usage of the back-office script: back-office <merged tsf> <old maf> <new maf> <new vaf>
 
-//Main Class waits for a user to login, then keeps them in a loop which handles commands, upon logout, the main class will start
-//over and wait for another login.
+// Main class will verify that the parameters are provided, initialize the AccountManager,
+// invoke the TransactionSummaryProcessor, and then have the AccountManager generate the output files
 public class Main {
     public static void exit() {
         System.out.close();

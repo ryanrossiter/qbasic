@@ -4,10 +4,16 @@ import java.io.*;
 import java.util.*;
 
 /*
-    Account Manager is responsible for loading in the Master Accounts File. Then it is responsible for checking whether or not
-    a given account number is in the Valid Accounts List.
+    Account Manager is responsible for loading in the Master Accounts File.
+    It is used by the transaction classes to make transactions on the accounts.
+
+    It contains an Account class that stores the account number, balance, and account name.
+    The Account class is responsible for validating balance updates.
+
+    The Account Manager also provides methods to generate master accounts files and valid accounts files.
  */
 public class AccountManager {
+    // Class to represent individual accounts
     public static class Account {
         private int number;
         private int balance;
@@ -19,6 +25,7 @@ public class AccountManager {
             this.name = name;
         }
 
+        // Verifies that the new balance is valid (>= 0)
         public boolean setBalance(int balance) {
             if (balance < 0) {
                 System.out.println("Failed to update balance, cannot be negative.");
@@ -30,6 +37,7 @@ public class AccountManager {
             return false;
         }
 
+        // Formatting corresponds to the master accounts file formatting
         public String toString() {
             return String.format("%07d %d %s", number, balance, name);
         }
@@ -48,8 +56,10 @@ public class AccountManager {
     }
 
     private static boolean initialized = false;
+    // accounts maps account numbers to account instances
     private static Map<Integer, Account> accounts = new TreeMap<Integer, Account>();
-    // Initialize loads in the Valid Account List using File Reader.
+
+    // Initialize loads in the Master Account List using File Reader.
     public static void Initialize(String accountFile) {
         if (initialized == true) {
             return;
@@ -98,7 +108,7 @@ public class AccountManager {
         }
     }
 
-    //Exists checks if a given accountNumber is contained within the Valid Accounts List.
+    //Exists checks if a given accountNumber is contained within the accounts list.
     public static boolean Exists(int accountNumber) {
         return accounts.containsKey(accountNumber);
     }
@@ -107,6 +117,7 @@ public class AccountManager {
         return accounts.get(accountNumber);
     }
 
+    // Creates a new account if the account number does not already exist.
     public static void Create(int accountNumber, String name) {
         if (accounts.containsKey(accountNumber) == false) {
             accounts.put(accountNumber, new Account(accountNumber, 0, name));
@@ -115,6 +126,7 @@ public class AccountManager {
         }
     }
 
+    // Deletes an account if the account number exists and the name provided matches the account name.
     public static void Delete(int accountNumber, String name) {
         Account acc = AccountManager.GetAccount(accountNumber);
         if (acc == null) {
@@ -126,6 +138,7 @@ public class AccountManager {
         }
     }
 
+    // Generates a new master accounts file containing the accounts stored in the accounts list
     public static void GenerateNewMasterAccountsFile(String masterAccountFilename) {
         PrintWriter outputStream;
         try {
@@ -142,6 +155,7 @@ public class AccountManager {
         }
     }
 
+    // Generates a new valid accounts file containing the account numbers in the accounts list
     public static void GenerateNewValidAccountsFile(String validAccountFilename) {
         PrintWriter outputStream;
         try {

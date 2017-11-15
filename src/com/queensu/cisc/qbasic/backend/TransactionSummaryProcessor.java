@@ -4,11 +4,15 @@ import com.queensu.cisc.qbasic.backend.transaction.TransactionRegistry;
 
 import java.io.*;
 
+/*
+    The TransactionSummaryProcessor is responsible for reading the provided transaction summary file
+    and using a TransactionRegistry instance to process each transaction line.
+ */
 public class TransactionSummaryProcessor {
     public static void ProcessTransactions(String transactionSummaryFilename) {
         TransactionRegistry transactionRegistry = new TransactionRegistry();
         BufferedReader inputStream = null;
-        int transactionCount = 0;
+        int transactionCount = 0; // A counter for log information after done processing
 
         try {
             inputStream = new BufferedReader(new FileReader(transactionSummaryFilename));
@@ -26,6 +30,7 @@ public class TransactionSummaryProcessor {
 
         try {
             String line;
+            // Stops reading lines at the end of the file or when the "EOS" line is reached.
             while ((line = inputStream.readLine()) != null && line.equals("EOS") == false) {
                 try {
                     String[] items = line.split(" ", 5);
@@ -35,6 +40,7 @@ public class TransactionSummaryProcessor {
                     Integer accountNum1 = Integer.valueOf(items[3]);
                     String accountName = items[4];
 
+                    // Pass the parsed parameters to the transactionRegistry for the appropriate transaction to be invoked.
                     transactionRegistry.processTransaction(transactionID, accountNum0, amount, accountNum1, accountName);
                     transactionCount++;
                 } catch (NumberFormatException e) {

@@ -9,9 +9,14 @@ public class WithdrawTransaction implements Transaction {
         return "WDR";
     }
 
+    // Withdraws amount from the account associated with accountNum0
     @Override
     public void processTransaction(int accountNum0, int amount, int accountNum1, String accountName) {
         AccountManager.Account acc = AccountManager.GetAccount(accountNum0);
-        acc.setBalance(acc.getBalance() - amount);
+        if (acc == null) {
+            System.out.println("Account number " + accountNum0 + " does not exist.");
+        } else {
+            acc.setBalance(acc.getBalance() - amount);
+        }
     }
 }

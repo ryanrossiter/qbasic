@@ -19,8 +19,19 @@ public class AccountManager {
             this.name = name;
         }
 
-        public void setBalance(int balance) {
-            // do things
+        public boolean setBalance(int balance) {
+            if (balance < 0) {
+                System.out.println("Failed to update balance, cannot be negative.");
+            } else {
+                this.balance = balance;
+                return true;
+            }
+
+            return false;
+        }
+
+        public String toString() {
+            return String.format("%07d %d %s", number, balance, name);
         }
 
         public int getNumber() {
@@ -86,6 +97,7 @@ public class AccountManager {
             }
         }
     }
+
     //Exists checks if a given accountNumber is contained within the Valid Accounts List.
     public static boolean Exists(int accountNumber) {
         return accounts.containsKey(accountNumber);
@@ -98,17 +110,52 @@ public class AccountManager {
     public static void Create(int accountNumber, String name) {
         if (accounts.containsKey(accountNumber) == false) {
             accounts.put(accountNumber, new Account(accountNumber, 0, name));
+        } else {
+            System.out.println("Failed to create account: account number " + accountNumber + " already exists.");
         }
     }
 
     public static void Delete(int accountNumber, String name) {
         Account acc = AccountManager.GetAccount(accountNumber);
         if (acc == null) {
-            // err
+            System.out.println("Failed to delete account: account number " + accountNumber + " does not exist.");
         } else if (acc.getName().equals(name) == false) {
-            // name doesn't match
+            System.out.println("Failed to delete account: account name does not match.");
         } else {
             accounts.remove(accountNumber);
+        }
+    }
+
+    public static void GenerateNewMasterAccountsFile(String masterAccountFilename) {
+        PrintWriter outputStream;
+        try {
+            outputStream = new PrintWriter(new FileWriter(masterAccountFilename));
+
+            Iterator<Account> itr = accounts.values().iterator();
+            while (itr.hasNext()) {
+                outputStream.println(itr.next().toString());
+            }
+
+            outputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void GenerateNewValidAccountsFile(String validAccountFilename) {
+        PrintWriter outputStream;
+        try {
+            outputStream = new PrintWriter(new FileWriter(validAccountFilename));
+
+            Iterator<Account> itr = accounts.values().iterator();
+            while (itr.hasNext()) {
+                outputStream.println(String.format("%07d", itr.next().getNumber()));
+            }
+
+            outputStream.println("0000000");
+            outputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

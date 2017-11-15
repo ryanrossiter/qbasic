@@ -19,8 +19,10 @@ public class TransferTransaction implements Transaction {
         } else if (acc1 == null) {
             // err
         } else {
-            acc0.setBalance(acc0.getBalance() - amount);
-            acc1.setBalance(acc1.getBalance() + amount);
+            boolean success = acc0.setBalance(acc0.getBalance() - amount);
+            if (success) {
+                acc1.setBalance(acc1.getBalance() + amount);
+            }
         }
     }
 }

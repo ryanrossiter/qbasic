@@ -15,20 +15,21 @@ public class Main {
     }
 
     public static void main(String[] params) {
-//        if (params.length < 4) {
-//            System.out.println("usage: back-office <merged tsf> <old maf> <new maf> <new vaf>");
-//            return;
-//        }
+        if (params.length < 4) {
+            System.out.println("usage: back-office <merged tsf> <old maf> <new maf> <new vaf>");
+            return;
+        }
 
-        String transactionSummaryFilename = "tsf.txt";//params[0];
-        String masterAccountFilename = "maf.txt";//params[1];
-        //String newMasterAccountFilename = params[2];
-        //String newValidAccountFilename = params[3];
+        String transactionSummaryFilename = params[0];
+        String masterAccountFilename = params[1];
+        String newMasterAccountFilename = params[2];
+        String newValidAccountFilename = params[3];
+
         //Starts up the Valid Account File, using the input from running the program: accountFilename
         AccountManager.Initialize(masterAccountFilename);
         TransactionSummaryProcessor.ProcessTransactions(transactionSummaryFilename);
-        // AccountManager.GenerateNewMasterAccountsFile(newMasterAccountFilename);
-        // AccountManager.GenerateNewValidAccountsFile(newValidAccountFilename);
+        AccountManager.GenerateNewMasterAccountsFile(newMasterAccountFilename);
+        AccountManager.GenerateNewValidAccountsFile(newValidAccountFilename);
 
         Main.exit();
     }

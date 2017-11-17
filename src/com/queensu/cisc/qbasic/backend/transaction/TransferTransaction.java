@@ -1,7 +1,7 @@
 package com.queensu.cisc.qbasic.backend.transaction;
 
 import com.queensu.cisc.qbasic.backend.AccountManager;
-//Handles the transfer transaction, receives input from TransactionRegistry.java
+//Handles the transfer transaction, receives input from TransactionRegistry.jav
 public class TransferTransaction implements Transaction {
 
     @Override

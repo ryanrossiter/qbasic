@@ -2,12 +2,14 @@ package com.queensu.cisc.qbasic.backend;
 
 import java.io.*;
 
-// This main class is intended to be run by the qbasic script
-// In the zip file this script is located at the root directory (sh and bat scripts for linux and windows respectively)
-// Usage of the qbasic script: qbasic <account-filename> <transaction-summary-filename>
+/*
+    This main class is intended to be run by the back-office script
+    In the zip file this script is located at the root directory (sh and bat scripts for linux and windows respectively)
+    Usage of the back-office script: back-office <merged tsf> <old maf> <new maf> <new vaf>
 
-//Main Class waits for a user to login, then keeps them in a loop which handles commands, upon logout, the main class will start
-//over and wait for another login.
+    Main class will verify that the required parameters are provided, initialize the AccountManager,
+    invoke the TransactionSummaryProcessor, and then have the AccountManager generate the output files
+*/
 public class Main {
     public static void exit() {
         System.out.close();
@@ -25,9 +27,14 @@ public class Main {
         String newMasterAccountFilename = params[2];
         String newValidAccountFilename = params[3];
 
-        //Starts up the Valid Account File, using the input from running the program: accountFilename
+        // Starts up the AccountManager, using the masterAccountFilename provided as input
         AccountManager.Initialize(masterAccountFilename);
+
+        // Invoke the TransactionSummaryProcessor to process transactions from the transactionSummaryFilename
         TransactionSummaryProcessor.ProcessTransactions(transactionSummaryFilename);
+
+        // Use the AccountManager to generate the output files with filenames
+        // provided by newMasterAccountFilename and newValidAccountFilename
         AccountManager.GenerateNewMasterAccountsFile(newMasterAccountFilename);
         AccountManager.GenerateNewValidAccountsFile(newValidAccountFilename);
 

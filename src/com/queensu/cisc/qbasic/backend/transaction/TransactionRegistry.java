@@ -2,7 +2,12 @@ package com.queensu.cisc.qbasic.backend.transaction;
 
 import java.util.HashMap;
 import java.util.Map;
-//Handles one line of input from a Merged Transaction Summary File, receives that line from Main.java
+
+/*
+    The TransactionRegistry is responsible for initializing the transaction handlers,
+    and invoking the appropriate transaction handler when the processTransaction method
+    is called by the TransactionSummaryProcessor.
+ */
 public class TransactionRegistry {
     private Map<String, Transaction> transactions = new HashMap<>();
 
@@ -15,15 +20,18 @@ public class TransactionRegistry {
         registerTransaction(new TransferTransaction());
     }
 
+    // Adds a transaction handler instance to the transactions map
     private void registerTransaction(Transaction t) {
         transactions.put(t.getTransactionString(), t);
     }
 
-    public void processTransaction(String transactionID, int accountNum0, int amount, int accountNum1, String accountName) {
-        if (transactions.containsKey(transactionID)) {
-            transactions.get(transactionID).processTransaction(accountNum0, amount, accountNum1, accountName);
+    // Accepts parsed transaction input and invokes the appropriate transaction handler's processTransaction
+    // method if one is registered, otherwise it prints an error for the unknown transaction code.
+    public void processTransaction(String transactionCode, int accountNum0, int amount, int accountNum1, String accountName) {
+        if (transactions.containsKey(transactionCode)) {
+            transactions.get(transactionCode).processTransaction(accountNum0, amount, accountNum1, accountName);
         } else {
-            System.out.println("Unknown transaction code \"" + transactionID + "\".");
+            System.out.println("Unknown transaction code \"" + transactionCode + "\".");
         }
     }
 }
